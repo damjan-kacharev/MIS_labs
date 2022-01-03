@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget{
       title: 'Kolokvium',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.blue,
-        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.lightBlue),
+        primaryColor: Colors.blueGrey,
+        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.grey),
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -46,21 +46,24 @@ class _MyHomePageState extends State<MyHomePage> {
     padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
-          color: Theme.of(context).accentColor,
+          color: Colors.indigo,
           shape: BoxShape.rectangle,
           boxShadow: <BoxShadow>[
             BoxShadow(
               color: Colors.black,
               blurRadius: 10,
-              offset: Offset(0.0,10)
+              offset: Offset(0.0,5)
             )
 
           ]
         ),
         child: Row(children: <Widget>[
+
           Expanded(
           child: Text(item.name,style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold),),
         ),
+
+
           // Expanded(
           //   child: Text(item.name,style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold),),
           // )
@@ -136,16 +139,44 @@ void refresh() async{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Dodaj kolokvium:"),
+        //automaticallyImplyLeading: false,
+        // leading: IconButton (
+        //   icon: Icon(Icons.arrow_back),
+        //   onPressed: () {
+        //     /** Do something */
+        //   },
+        // ),
+        backgroundColor: Colors.indigo,
+        actions: <Widget>[
+          Padding(
+              padding: EdgeInsets.only(right: 20.0),
+              child: IconButton(
+                onPressed: ()=> _create(context),
+                icon: Icon(
+                  Icons.add_to_photos_outlined,
+                  size: 26.0,
+                ),
+              )
+          ),
+
+        ],
+      ),
+
       backgroundColor: Theme.of(context).primaryColor,
       body: Container(
         child: ListView(
           children:<Widget> [
-              Padding(padding: EdgeInsets.fromLTRB(20, 20, 0, 10),
-                child: Text("Kolokviumi:",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold),),
 
+              Padding(
+                padding: EdgeInsets.fromLTRB(20, 20, 0, 10),
+                child: Text("Kolokviumi:",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold),),
               ),
 
-            ListView(
+
+
+              ListView(
               children: _items,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -155,11 +186,11 @@ void refresh() async{
         ),
       ),
 
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.redAccent,
-        onPressed: ()=> _create(context),
-        child: Icon(Icons.add,color: Colors.white,),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: Colors.redAccent,
+      //   onPressed: ()=> _create(context),
+      //   child: Icon(Icons.add,color: Colors.white,),
+      // ),
 
     );
   }
